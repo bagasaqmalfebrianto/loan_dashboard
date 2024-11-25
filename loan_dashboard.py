@@ -350,34 +350,32 @@ with st.container():
 
     # Right Section - Interface Rank
     with col3:
+               # Map Section
+        st.subheader("Jumlah Member dan Pinjaman di Setiap Negara Bagian")
 
-
-         # Bagian Visualisasi di Streamlit
-        st.subheader('Good Loan dan Bad Loan berdasarkan Purpose')
-
-        # Membuat bar chart horizontal menggunakan Plotly Express
-        fig_barh = px.bar(
-            loan_purpose_data,
-            y='purpose',  # Purpose berada di sumbu y
-            x='count',    # Jumlah pinjaman berada di sumbu x
-            color='loan_status',  # Pewarnaan berdasarkan loan_status
-            labels={'count': 'Jumlah', 'purpose': 'Purpose', 'loan_status': 'Status Pinjaman'},
-            template='plotly_white',
-            orientation='h',  # Menyusun chart secara horizontal
-            barmode='stack'  # Menggunakan barmode stack untuk status pinjaman
+        # Membuat peta choropleth menggunakan Plotly
+        fig_map = px.choropleth(
+            state_agg_data,
+            locations='state_code',
+            locationmode="USA-states",
+            color='member_count',
+            hover_name='addr_state',
+            hover_data={
+                'member_count': True,
+                'max_loan': True,
+                'min_loan': True,
+                'mean': True,
+                'state_code': False
+            },
+            color_continuous_scale="Blues"
         )
 
-        # Menyesuaikan layout agar lebih rapi
-        fig_barh.update_layout(
-            xaxis_title='Jumlah',
-            yaxis_title='Purpose',
-            legend_title_text='Loan Status',
-            height=600,
-            margin=dict(l=100, r=50, t=50, b=50)  # Mengatur margin untuk tampilan yang lebih baik
+        fig_map.update_layout(
+            geo_scope='usa'
         )
 
-        # Menampilkan chart di Streamlit
-        st.plotly_chart(fig_barh, use_container_width=True)
+        st.plotly_chart(fig_map, use_container_width=True)
+
 
 with st.container():
     col1, col2, col3 = st.columns([2, 4, 2])
@@ -430,28 +428,29 @@ with st.container():
         st.plotly_chart(fig_stacked_bar, use_container_width=True)
 
     with col3:
-               # Map Section
-        st.subheader("Jumlah Member dan Pinjaman di Setiap Negara Bagian")
+        # Bagian Visualisasi di Streamlit
+        st.subheader('Good Loan dan Bad Loan berdasarkan Purpose')
 
-        # Membuat peta choropleth menggunakan Plotly
-        fig_map = px.choropleth(
-            state_agg_data,
-            locations='state_code',
-            locationmode="USA-states",
-            color='member_count',
-            hover_name='addr_state',
-            hover_data={
-                'member_count': True,
-                'max_loan': True,
-                'min_loan': True,
-                'mean': True,
-                'state_code': False
-            },
-            color_continuous_scale="Blues"
+        # Membuat bar chart horizontal menggunakan Plotly Express
+        fig_barh = px.bar(
+            loan_purpose_data,
+            y='purpose',  # Purpose berada di sumbu y
+            x='count',    # Jumlah pinjaman berada di sumbu x
+            color='loan_status',  # Pewarnaan berdasarkan loan_status
+            labels={'count': 'Jumlah', 'purpose': 'Purpose', 'loan_status': 'Status Pinjaman'},
+            template='plotly_white',
+            orientation='h',  # Menyusun chart secara horizontal
+            barmode='stack'  # Menggunakan barmode stack untuk status pinjaman
         )
 
-        fig_map.update_layout(
-            geo_scope='usa'
+        # Menyesuaikan layout agar lebih rapi
+        fig_barh.update_layout(
+            xaxis_title='Jumlah',
+            yaxis_title='Purpose',
+            legend_title_text='Loan Status',
+            height=600,
+            margin=dict(l=100, r=50, t=50, b=50)  # Mengatur margin untuk tampilan yang lebih baik
         )
 
-        st.plotly_chart(fig_map, use_container_width=True)
+        # Menampilkan chart di Streamlit
+        st.plotly_chart(fig_barh, use_container_width=True)
