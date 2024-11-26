@@ -272,7 +272,7 @@ with st.container():
     #     st.image("show.jpeg", caption="Sunrise by the mountains")
 
     # with col2:
-        st.subheader("Trend Jumlah Pinjaman Bulanan Berdasarkan Tahun")
+        st.subheader("Trend Jumlah Pinjaman Tahunan")
         # Membuat plot menggunakan Plotly untuk interaktif
         fig = go.Figure()
 
@@ -298,7 +298,7 @@ with st.container():
 
     # Left Section - Department Radar Chart
     with col1:
-        st.subheader("Rata-rata Suku Bunga per Tahun")
+        st.subheader("Trend Suku Bunga Tahunan")
 
         # Membuat plot menggunakan Plotly untuk interaktif
         fig_interest = px.bar(
@@ -335,7 +335,7 @@ with st.container():
     # Middle Section - Success Rate
     with col2:
         # Visualisasi jumlah peminjam berdasarkan grade dan status pinjaman
-        st.subheader('Jumlah Peminjam Berdasarkan Grade dan Status Pinjaman')
+        st.subheader('Distribusi Grade Pinjaman')
         grade_fig = px.scatter(
             grade_data,
             x='grade',
@@ -351,7 +351,7 @@ with st.container():
     # Right Section - Interface Rank
     with col3:
                # Map Section
-        st.subheader("Jumlah Member dan Pinjaman di Setiap Negara Bagian")
+        st.subheader("Demografi Pinjaman di Setiap Negara Bagian")
 
         # Membuat peta choropleth menggunakan Plotly
         fig_map = px.choropleth(
@@ -382,7 +382,7 @@ with st.container():
 
     with col1:
                 # Bagian Visualisasi di Streamlit
-        st.subheader("Distribusi Status Kepemilikan Rumah Peminjam")
+        st.subheader("Status Kepemilikan Rumah Peminjam")
 
         # Membuat pie chart interaktif dengan Plotly
         fig_pie = px.pie(
@@ -404,7 +404,7 @@ with st.container():
 
     with col2:
 
-        st.subheader('Jumlah Anggota per Masa Kerja dan Status Pinjaman')
+        st.subheader('Masa Kerja Untuk Setiap Peminjam')
         fig_stacked_bar = px.bar(
             data_to_plot,
             x=data_to_plot.index,
@@ -429,7 +429,7 @@ with st.container():
 
     with col3:
         # Bagian Visualisasi di Streamlit
-        st.subheader('Good Loan dan Bad Loan berdasarkan Purpose')
+        st.subheader('Tujuan Melakukan Pinjaman')
 
         # Membuat bar chart horizontal menggunakan Plotly Express
         fig_barh = px.bar(
